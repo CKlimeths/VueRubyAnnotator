@@ -4,7 +4,7 @@
 
 VueRubyAnnotator 是一个基于 `Vue.js` 的 `HTML Ruby` 注音转换工具。它允许用户轻松地将汉字与其对应的注音（如拼音）进行关联，并获得对应的 `HTML` 代码。
 
-## 注音转换规则
+## 注音规则
 
 - `|BaseText^RubyText|` 是注音转换的基本格式。
 
@@ -37,17 +37,19 @@ VueRubyAnnotator 是一个基于 `Vue.js` 的 `HTML Ruby` 注音转换工具。�
 
 你可以访问以下链接访问来使用 VueRubyAnnotator。
 
-[1]()
+[VueRubyAnnotator (Github Pages)](cklimeths.github.io/VueRubyAnnotator)
 
 ### 2. 通过 `Node.js` 运行
 
-1. **安装依赖**：
+1. **下载源代码**：
 
-   首先，确保你已经安装了 `Node.js` 和 `npm` 。然后，克隆本项目到本地：
+   首先，确保你已经安装了 `Git` , `Node.js` 和 `npm` 。然后，克隆本项目到本地：
 
    ```bash
    git clone https://github.com/cklimeths/VueRubyAnnotator.git
    ```
+
+2. **安装依赖**：
 
    进入项目目录：
 
@@ -61,15 +63,17 @@ VueRubyAnnotator 是一个基于 `Vue.js` 的 `HTML Ruby` 注音转换工具。�
    npm install
    ```
 
-2. **运行项目**： 在项目根目录下运行以下命令以启动开发服务器：
+3. **运行项目**：
+
+   在项目根目录下运行以下命令以启动开发服务器：
 
    ```
    npm run dev
    ```
 
-3. **访问应用**：
+4. **访问应用**：
 
-   打开浏览器，访问 `http://localhost:5173` 即可查看应用。
+   打开浏览器，访问 `http://localhost:5173` 。
 
 ## 技术栈
 
@@ -79,4 +83,4 @@ VueRubyAnnotator 是一个基于 `Vue.js` 的 `HTML Ruby` 注音转换工具。�
 
 ## 开源协议
 
-本项目使用 `LGPL-2.1 license` 开源协议。
+本项目遵循 `LGPL-2.1 license` 开源协议。
