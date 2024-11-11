@@ -37,7 +37,7 @@ VueRubyAnnotator 是一个基于 `Vue.js` 的 `HTML Ruby` 注音转换工具。�
 
 你可以访问以下链接访问来使用 VueRubyAnnotator。
 
-[VueRubyAnnotator (Github Pages)](cklimeths.github.io/VueRubyAnnotator)
+[VueRubyAnnotator (Github Pages)](https://cklimeths.github.io/VueRubyAnnotator)
 
 ### 2. 通过 `Node.js` 运行
 
