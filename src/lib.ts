@@ -21,6 +21,7 @@ export function convertRuby(str: string): string {
   for (const char of str) {
     context.handleChar(char)
   }
+  context.checkTagClosure()
   return context.getResult()
 }
 
@@ -65,8 +66,9 @@ class RubyTextState implements State {
       context.pushState(new EscCharState())
     } else if (char === '|') {
       context.popState()
+      context.appendResult('</rt>')
       context.popState()
-      context.appendResult('</rt></ruby>')
+      context.appendResult('</ruby>')
     } else {
       context.appendResult(char)
     }
@@ -99,6 +101,26 @@ class Context {
 
   handleChar(char: string) {
     this.stateStack[this.stateStack.length - 1].handleChar(char, this)
+  }
+
+  checkTagClosure() {
+    let flag = false
+    for (let item = this.stateStack.pop(); item; item = this.stateStack.pop()) {
+      if (item instanceof BaseTextState) {
+        this.appendResult('</ruby>')
+        flag = true
+      } else if (item instanceof RubyTextState) {
+        this.appendResult('</rt>')
+        flag = true
+      } else if (item instanceof EscCharState) {
+        flag = true
+      }
+    }
+    if (flag) {
+      this.appendResult(
+        '<br><p style="color: grey; font-style: italic;">❕检测到未闭合的标签，请检查格式。</p>',
+      )
+    }
   }
 
   getResult(): string {
