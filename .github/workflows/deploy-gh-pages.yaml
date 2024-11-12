@@ -13,7 +13,7 @@ on:
 
 jobs:
   # 构建
-  build:
+  deploy:
     # 运行环境
     runs-on: ubuntu-latest
 
