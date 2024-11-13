@@ -1,4 +1,4 @@
-<template>
+<template lang="html">
   <div class="container">
     <div class="block">
       <p class="title">VueRubyAnnotator</p>
@@ -13,7 +13,9 @@
     ></textarea>
 
     <div class="box preview">
-      <p v-if="previewText!.trim().length === 0">结果文本预览</p>
+      <p v-if="previewText!.trim().length === 0" class="preview-empty">
+        结果文本预览
+      </p>
       <p v-else v-html="previewText"></p>
     </div>
 
@@ -21,11 +23,13 @@
   </div>
 </template>
 
-<style>
+<style lang="css">
 body {
   margin: 1.5rem;
 }
+</style>
 
+<style lang="css" scoped>
 .container {
   height: calc(100vh - 3rem);
   width: calc(100vw - 3rem);
@@ -34,14 +38,17 @@ body {
 }
 
 .input {
-  flex-grow: 1;
   flex-basis: 50%;
 }
 
 .preview {
-  flex-grow: 1;
   flex-basis: 50%;
   overflow-y: scroll;
+}
+
+.preview-empty {
+  color: lightgray;
+  font-style: italic;
 }
 </style>
 
