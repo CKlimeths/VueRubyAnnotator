@@ -118,7 +118,7 @@ class Context {
     }
     if (flag) {
       this.appendResult(
-        '<br><p style="color: grey; font-style: italic;">❕检测到未闭合的标签，请检查格式。</p>',
+        '<br><p style="color: lightgray; font-style: italic;">⚠️ 检测到未闭合的标签，请检查格式。</p>',
       )
     }
   }
