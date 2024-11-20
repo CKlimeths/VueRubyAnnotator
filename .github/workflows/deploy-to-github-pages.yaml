@@ -12,7 +12,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  # 构建
+  # 部署
   deploy:
     # 运行环境
     runs-on: ubuntu-latest
@@ -21,7 +21,6 @@ jobs:
     permissions:
       contents: read
       pages: write
-      id-token: write
 
     # 环境变量
     environment:
@@ -31,12 +30,12 @@ jobs:
     # 步骤
     steps:
       - name: Checkout
-        uses: actions/checkout@v4.2.2
+        uses: actions/checkout@latest
 
       - name: Set up Node.js
-        uses: actions/setup-node@v4.1.0
+        uses: actions/setup-node@latest
         with:
-          node-version: '20'
+          node-version: 'latest'
 
       - name: Install dependencies
         run: npm install
@@ -45,13 +44,13 @@ jobs:
         run: npm run build
 
       - name: Configure GitHub Pages
-        uses: actions/configure-pages@v5.0.0
+        uses: actions/configure-pages@latest
 
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3.0.1
+        uses: actions/upload-pages-artifact@latest
         with:
           path: './dist'
 
-      - name: Deploy to GitHub Pages
+      - name: Deploy to Github Pages
         id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@latest
