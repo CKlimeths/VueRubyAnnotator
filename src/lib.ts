@@ -1,16 +1,16 @@
 // 复制到剪切板
 export function copyText(str: string) {
   if (str.length === 0) {
-    alert('请先输入要转换的文本')
+    alert('⚠️ 没有可复制的有效代码！')
     return
   }
   navigator.clipboard
     .writeText(str)
     .then(() => {
-      alert('复制成功')
+      alert('✅ 复制成功。')
     })
     .catch(err => {
-      alert('复制失败')
+      alert('❌ 复制失败。')
       console.log(`复制失败: ${err}`)
     })
 }
