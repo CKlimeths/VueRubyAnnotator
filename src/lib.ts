@@ -1,6 +1,6 @@
 // 复制到剪切板
 export function copyText(str: string) {
-  if (str.trim().length === 0) {
+  if (str.length === 0) {
     alert('请先输入要转换的文本')
     return
   }
@@ -11,12 +11,12 @@ export function copyText(str: string) {
     })
     .catch(err => {
       alert('复制失败')
-      console.log('复制失败', err)
+      console.log(`复制失败: ${err}`)
     })
 }
 
 // 转换函数
-export function convertRuby(str: string): string {
+export function convertRuby(str: string): Result<string, string> {
   const context = new Context()
   for (const char of str) {
     context.handleChar(char)
@@ -77,8 +77,29 @@ class RubyTextState implements State {
 
 class EscCharState implements State {
   handleChar(char: string, context: Context) {
-    context.popState()
-    context.appendResult(char)
+    if (char === '|' || char === '\\' || char === '^') {
+      context.popState()
+      context.appendResult(char)
+    } else {
+      context.popState()
+      context.appendResult(char)
+
+      let c = char
+
+      const convert = [
+        { from: '\n', to: 'enter' },
+        { from: '\t', to: 'tab' },
+        { from: ' ', to: 'space' },
+      ]
+
+      for (const item of convert) {
+        if (char === item.from) {
+          c = item.to
+        }
+      }
+
+      context.appendErr(`⚠️ 无效转义: ${c}。`)
+    }
   }
 }
 
@@ -86,6 +107,7 @@ class EscCharState implements State {
 class Context {
   private stateStack: State[] = [new NoneState()]
   private result: string = ''
+  private error: string = ''
 
   pushState(state: State) {
     this.stateStack.push(state)
@@ -97,6 +119,10 @@ class Context {
 
   appendResult(str: string) {
     this.result += str
+  }
+
+  appendErr(str: string) {
+    this.error += str
   }
 
   handleChar(char: string) {
@@ -117,13 +143,13 @@ class Context {
       }
     }
     if (flag) {
-      this.appendResult(
-        '<br><p style="color: lightgray; font-style: italic;">⚠️ 检测到未闭合的标签，请检查格式。</p>',
-      )
+      this.appendErr('⚠️ 检测到未闭合的标签，请检查格式。')
     }
   }
 
-  getResult(): string {
-    return this.result
+  getResult(): Result<string, string> {
+    return [this.result, this.error]
   }
 }
+
+type Result<R, E> = [R, E]
