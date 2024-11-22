@@ -1,4 +1,4 @@
-<template lang="html">
+<template>
   <div class="container">
     <div class="block">
       <p class="title">VueRubyAnnotator</p>
@@ -9,27 +9,33 @@
       class="textarea box input"
       v-model="inputText"
       placeholder="请输入要转换的文本"
-      @input="previewText = convertRuby(inputText!)"
+      @input="[previewText, errorText] = convertRuby(inputText)"
     ></textarea>
 
     <div class="box preview">
-      <p v-if="previewText!.trim().length === 0" class="preview-empty">
-        结果文本预览
+      <p
+        v-if="previewText.length === 0 && errorText.length === 0"
+        class="preview-empty"
+      >
+        转换结果预览
       </p>
       <p v-else v-html="previewText"></p>
+      <p v-if="errorText.length !== 0" class="error" v-html="errorText"></p>
     </div>
 
     <button class="button" @click="copyText(previewText)">复制代码</button>
   </div>
 </template>
 
-<style lang="css">
+<style>
+@import url('bulma/css/bulma.css');
+
 body {
   margin: 1.5rem;
 }
 </style>
 
-<style lang="css" scoped>
+<style scoped>
 .container {
   height: calc(100vh - 3rem);
   width: calc(100vw - 3rem);
@@ -39,6 +45,7 @@ body {
 
 .input {
   flex-basis: 50%;
+  overflow-y: scroll;
 }
 
 .preview {
@@ -48,16 +55,18 @@ body {
 
 .preview-empty {
   color: lightgray;
-  font-style: italic;
+}
+
+.error {
+  color: lightgray;
 }
 </style>
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import 'bulma/css/bulma.css'
+import { convertRuby, copyText } from '@/lib'
 
-import { convertRuby, copyText } from './lib'
-
-const inputText = defineModel<string>('')
+const inputText = ref<string>('')
 const previewText = ref<string>('')
+const errorText = ref<string>('')
 </script>
