@@ -1,7 +1,7 @@
 // 复制到剪切板
 export function copyText(str: string) {
   if (str.length === 0) {
-    alert('⚠️ 没有可复制的有效代码！')
+    alert('⚠️ 没有可复制的有效代码。')
     return
   }
   navigator.clipboard
@@ -10,7 +10,7 @@ export function copyText(str: string) {
       alert('✅ 复制成功。')
     })
     .catch(err => {
-      alert('❌ 复制失败。')
+      alert('❌ 复制失败。转到控制台查看错误详情。')
       console.log(`复制失败: ${err}`)
     })
 }
