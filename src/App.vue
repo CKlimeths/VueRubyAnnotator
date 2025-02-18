@@ -28,8 +28,6 @@
 </template>
 
 <style>
-@import url('bulma/css/bulma.css');
-
 body {
   margin: 1.5rem;
 }
@@ -63,6 +61,9 @@ body {
 </style>
 
 <script setup lang="ts">
+//bulma css
+import 'bulma/css/bulma.css'
+
 import { ref } from 'vue'
 import { convertRuby, copyText } from '@/lib'
 
