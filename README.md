@@ -91,4 +91,4 @@ VueRubyAnnotator 是一个基于 `Vue.js` 的 `HTML Ruby` 注音转换工具，�
 
 ## 开源协议
 
-本项目遵循 `LGPL-2.1 license` 开源协议。
+本项目遵循 `MIT license` 开源协议。
